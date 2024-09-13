@@ -3,11 +3,23 @@ const app= express()
 const env= require('dotenv')
 const cors = require("cors")
 env.config() 
+
+
+
+
+
+
+
+
+
 const bodyParser= require('body-parser')
 
 
-const { companyRegisterRoute } = require('./src/Routes/Company/registerRoutes')
 
+
+
+
+const { companyRegisterRoute } = require('./src/Routes/Company/registerRoutes')
 const { companyLoginRoute } = require('./src/Routes/Company/Login')
 const { profileDataRoute } = require('./src/Routes/Company/ProfileData')
 const { updateCompanyProfileRoute } = require('./src/Routes/Company/UpdateProfileData')
