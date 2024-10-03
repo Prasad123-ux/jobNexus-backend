@@ -3,7 +3,8 @@
 
 const { JobSeekerDetail } = require("../../Modules/Candidate/JobSeekers")
 
-const getProfileDataController= async (req, res)=>{
+const getProfileDataController= async (req, res)=>{  
+  console.log(req.body)
 
     try{
   const candidateData= await JobSeekerDetail.findOne({Email:req.email}) 

@@ -40,6 +40,8 @@ const { getOtp } = require('./Routes/Candidate/getOtp')
 const { googleRouter } = require('./Routes/Candidate/getMailApi')
 const { updateResume } = require('./Routes/Candidate/SaveResume')
 const { AddEducationRouter } = require('./Routes/Candidate/AddEducation')
+const { filterRoute } = require('./Routes/Candidate/Filterdata')
+const { searchRoute } = require('./Routes/Candidate/SearchJob')
 
 
 
@@ -70,12 +72,14 @@ app.use('/api/candidate', AppliedJobRoute)
 app.use('/api/candidate',getOtp)
 app.use('/api/candidate/google',googleRouter)
 app.use('/api/candidate/profile', updateResume)
-app.use('/api/candidate/profile', AddEducationRouter)
+app.use('/api/candidate/profile', AddEducationRouter) 
+app.use('/api/candidate', filterRoute)  
+app.use('/api/candidate', searchRoute)
 
 
 
 
-const port= process.env.PORT  
+const port= process.env.PORT   || 5000
 
 
 

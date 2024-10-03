@@ -14,7 +14,7 @@ console.log(userData.password)
 const error= validationResult(req)
 
 if(!error.isEmpty()){
-    res.status(400).json({success:false, message:"validation error", error:error.errors[0].msg})
+   return   res.status(400).json({success:false, message:"validation error", error:error.errors[0].msg})
 }else{
    
 
@@ -23,7 +23,7 @@ if(!error.isEmpty()){
         //  console.log(user)     
         if(user!==null){
 
-            res.status(400).json({success:false, message:"user already found"})
+           return  res.status(400).json({success:false, message:"user already found"})
         }else{
             
 
@@ -31,7 +31,7 @@ if(!error.isEmpty()){
             const salt=10
             bcrypt.hash(userData.password, salt,(err, result)=>{
                 if(err){
-                    res.status(400).json({success:false, message:"ohh1 there is some error", error:err.message})
+                    return  res.status(400).json({success:false, message:"ohh1 there is some error", error:err.message})
                 }else if(result){
                     userData.password= result 
                     // console.log(req.body.password)
@@ -117,13 +117,13 @@ if(!error.isEmpty()){
                             const token= jwt.sign({email:user.Email, role:user.role},process.env.JWT_TOKEN, {"expiresIn":"30d"})
                             res.status(200).json({success:true, message:"Data saved", token:token})
                         }).catch((err)=>{
-                            res.status(404).json({success:true, message:"Problem with data saving" , error:err})
+                          return   res.status(404).json({success:true, message:"Problem with data saving" , error:err})
 
                         })
 
 
                 }else{
-                    res.status(404).json({success:false, message:"there is some problem "})
+                   return   res.status(404).json({success:false, message:"there is some problem "})
                 }
 
             } )
