@@ -10,21 +10,29 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
+ 
 
-// Multer configuration
+
+
+
+
+
+
+
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'upload');  // Folder to temporarily store uploads
+        cb(null, './src/upload');  // Folder to temporarily store uploads
     },
     filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + "_" + Math.floor(Math.random() * 1000 + 1);
+        const uniqueSuffix = Date.now() + "_" + Math.floor(Math.random() * 1000 + 1);   
         cb(null, uniqueSuffix + path.extname(file.originalname));
     }
-});
-
-
-
-const upload = multer({ storage: storage }).single('resume');
+});  
+                                                                       
+const upload = multer({ storage: storage }).single('resume'); 
+ 
+                                                                 
 
 // Controller to save the resume
 const saveResumeController = (req, res) => {
@@ -41,7 +49,7 @@ console.log(req.body)
         }
     
         const filePath = req.file.path;
-        console.log(filePath)
+        console.log(filePath)      
 
         try {
             // Upload to Cloudinary
@@ -70,7 +78,7 @@ console.log(req.body)
                 return res.status(500).json({ success: false, message: 'Error updating resume' });
             });
         } catch (error) {
-            return res.status(500).json({ success: false, message: 'Error uploading resume to Cloudinary', error });
+            return res.status(500).json({ success: false, message: 'Error uploading resume to Cloudinary', error:error.message });
         }
     });
 };

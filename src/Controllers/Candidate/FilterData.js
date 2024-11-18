@@ -23,7 +23,7 @@ const data = req.query
     }
 
 
-    if(finalResult.length ===0) {
+    if(finalResult.length === 0) {
         return res.status(400).json({ success: false, message: "Data not found" });
     } 
     return res.status(200).json({success:true, message:"Data Found" , jobs:finalResult})

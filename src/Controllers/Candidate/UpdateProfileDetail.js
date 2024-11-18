@@ -3,17 +3,15 @@ const { JobSeekerDetail } = require("../../Modules/Candidate/JobSeekers");
 const updateProfileDetailController= (req, res)=>{
      const dataType= req.body.dataType
      const email= req.email;  
-     const data = req.body.data
-    console.log(req.body)
-     console.log(dataType)
-
+     const data = req.body.data;
+    console.log(dataType)
     const fieldToUpdate=`extraFields.${dataType}`;
     const isDataArray=Array.isArray(data)
     
     const updateOperation = isDataArray  ? { $push: { [fieldToUpdate]: {$each:data} } }:{$set:{[fieldToUpdate]:data}};
 
 
- 
+
 
         JobSeekerDetail.findOneAndUpdate(
             {Email:email}, 
@@ -34,7 +32,8 @@ updateOperation,
             }
 
         }).catch((err)=>{ 
-            return res.status(500).json({success:false, message:"Internal Server Error", error:err.message})
+            return res.status(500).json({success:false, message:"Internal Server Error", error:err.message}) 
+            
 
         })
 }

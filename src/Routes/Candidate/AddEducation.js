@@ -1,11 +1,11 @@
 const express = require("express")  
-const { addNewEducationController } = require("../../Controllers/Candidate/AddEducation")
+const {  addNewProfileController } = require("../../Controllers/Candidate/AddEducation")
 const { candidateAuthenticationMiddleware } = require("../../Middlewares/Candidate/Authentication")
 const AddEducationRouter= express.Router()  
 
 
 
-AddEducationRouter.post('/addProfileDetail',candidateAuthenticationMiddleware, addNewEducationController)
+AddEducationRouter.post('/addProfileDetail',candidateAuthenticationMiddleware, addNewProfileController)
 
 
-module.exports={AddEducationRouter}
+module.exports={AddEducationRouter}   

@@ -72,7 +72,12 @@ const CompanySchema= mongoose.Schema ({
         type:String,
         enum:['candidate', 'company', 'Admin'],
         default:'company'
-    }
+    },
+    
+    CompanyFollowers: [{
+        type: mongoose.Schema.Types.ObjectId, // Store follower IDs as ObjectId references
+        ref: 'JobSeekerDetail'  // Reference the job seeker model
+    }]
 
 
 }, {timestamps:true})

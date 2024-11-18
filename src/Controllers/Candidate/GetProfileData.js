@@ -18,7 +18,7 @@ const getProfileDataController= async (req, res)=>{
 
     }
     catch(err){
-       return   res.status(500).json({success:false, message:"Data Not Found", err:err})
+       return   res.status(500).json({success:false, message:"Data Not Found", err:err.message})
 
     }
 
