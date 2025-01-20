@@ -44,69 +44,7 @@ if(!error.isEmpty()){
                     WorkStatus:userData.workStatus,
                     City:userData.city,
                     MobileNumber:userData.mobileNumber
-                    //    FullName : req.body.fullName ||"",
-                    //     DateOfBirth:req.body.dateOfBirth ||"",
-                    //     Gender:req.body.gender || "",
-                    //     Email:req.body.email || "",
-                    //     Password:req.body.password ||"",
-                    //     MobileNumber:req.body.mobileNumber ||"",
-                    //     Address:req.body.address ||"" ,
-                    //     Education:req.body.education.map(edu=>({
-                    //          Degree:edu.degree,
-                    //          Major:edu.Major,
-                    //          University:edu.university,
-                    //          GraduationYear:edu.graduationYear,
-                    //          GPA:edu.gpa
-
-
-                    //     })) ||"",
-                    //     WorkExperience:req.body.workExperience.map(work=>({
-                    //         JobTitle: work.jobTitle,
-                    //         CompanyName: work.companyName,
-                    //         Duration: work.duration,
-                    //         JobDescription: work.jobDescription
-                    //     })) ||"",
-                    //    Skills:req.body.skills.map(skills=>({skills:skills.skills})),
-                    //    Projects:req.body.projects.map(project=>({
-                    //  Title:project.title,
-                    //  Date:project.date,
-                    //  Description:project.description
-                    //    })) ||"",
-                    //    Achievements:req.body.achievements.map(achievement=>({
-                    //  Title:achievement.title,
-                    //  Date:achievement.date,
-                    //  Organization:achievement.organization,
-                    //  description:achievement.description
                    
-
-                    //    })) ||"",
-                       
-                    //    Summary:req.body.summary,
-                    //    Activities:req.body.activities.map(activity=>({
-                    //     Title:activity.title,
-                    //     Description:activity.description,
-                    //     Position:activity.position
-                    //    })) ||"",
-                       
-                       
-                     
-                    //    Language: req.body.languages.map(language=>({
-                    //           Language:language.language,
-                    //           Proficiency:language.proficiency
-
-                    //    })) ||""
-                    //   ,
-                    //    Reference:req.body.references.map(reference=>({
-                    //      Name:reference.name,
-                    //      Relationship:reference.relationship,
-                    //      contact:reference.contact
-                    //    })) ||""
-                       
-                    //    ,
-                    //    Certification:req.body.certification.map(certification=>({
-                    //     Name:certification.name,
-                    //     Date:certification.date
-                    //    })) 
                        
                       
                        
@@ -117,7 +55,8 @@ if(!error.isEmpty()){
                             const token= jwt.sign({email:user.Email, role:user.role},process.env.JWT_TOKEN, {"expiresIn":"30d"})
                             res.status(200).json({success:true, message:"Data saved", token:token})
                         }).catch((err)=>{
-                          return   res.status(404).json({success:true, message:"Problem with data saving" , error:err})
+                            console.log(err.message)
+                          return   res.status(404).json({success:true, message:"Problem with data saving" , error:err.message})
 
                         })
 
