@@ -52,7 +52,13 @@ if(!error.isEmpty()){
                        
                         candidateObject.save().then((user)=>{
                             //  console.log(user)
-                            const token= jwt.sign({email:user.Email, role:user.role},process.env.JWT_TOKEN, {"expiresIn":"30d"})
+                            const token= jwt.sign({email:user.Email, role:user.role},process.env.JWT_TOKEN, {"expiresIn":"30d"}) 
+                            // res.cookie('authToken', token, {
+                            //     httpOnly:true,
+                            //     secure:true, 
+                            //     sameSite:'Strict',
+                            //     maxAge:24*60*60*1000
+                            // })
                             res.status(200).json({success:true, message:"Data saved", token:token})
                         }).catch((err)=>{
                             console.log(err.message)
