@@ -46,30 +46,30 @@ const { followCompanyRouter } = require('./Routes/Company/FollowCompanyControlle
 app.use(bodyParser.json())
 // app.use(express.json()); 
 
+
+
+
 const allowedOrigins = [
-    "http://localhost:3000", // Local development
-    "https://jobnexus-backend.onrender.com", // Vercel deployment
-  ];
-  
-  
-  app.use(
-    cors({
-      origin: (origin, callback) => {
-        // Allow requests with no origin (e.g., mobile apps or Postman)
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error("Not allowed by CORS"));
-        }
-      },
-      methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-      allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-      credentials: true, // Allow credentials (cookies, etc.)
-    })
-  );
+  "http://localhost:3000", // Local development
+  "https://jobnexus-backend.onrender.com", // Backend itself
+  "https://react-application-beige.vercel.app", // Vercel frontend
+];
 
-
-
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the request
+      } else {
+        console.error(`Blocked by CORS: Origin - ${origin}`);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    credentials: true, // Allow credentials (cookies, etc.)
+  })
+);
 
 
 
