@@ -1,11 +1,11 @@
 const express= require('express')
-const { SaveJobsController } = require('../../Controllers/Candidate/SaveJobs')
+const { SaveJobsController, SavedJobController } = require('../../Controllers/Candidate/SaveJobs')
 const { candidateAuthenticationMiddleware } = require('../../Middlewares/Candidate/Authentication')
 const saveJobsRoutes= express.Router() 
 
 
 
-saveJobsRoutes.get('/save_job',  candidateAuthenticationMiddleware,SaveJobsController)
+saveJobsRoutes.post('/save_job/:id',  candidateAuthenticationMiddleware,SavedJobController)
 
 
 module.exports={saveJobsRoutes}

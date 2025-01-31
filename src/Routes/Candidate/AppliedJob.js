@@ -5,6 +5,6 @@ const AppliedJobRoute= express.Router()
 
 
 
-AppliedJobRoute.get('/AppliedForJob/:id',candidateAuthenticationMiddleware,AppliedJobsController)
+AppliedJobRoute.post('/appliedForJob/:id',candidateAuthenticationMiddleware,AppliedJobsController)
 
 module.exports={AppliedJobRoute}

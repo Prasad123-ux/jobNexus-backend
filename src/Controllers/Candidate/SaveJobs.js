@@ -1,28 +1,39 @@
 // const { SavedJob } = require("../../Modules/Candidate/SaveJob")
+const { AppliedJobData } = require("../../Modules/Candidate/AppliedJob")
 const { SavedJob } = require("../../Modules/Candidate/SaveJob")
 const { JobDetail } = require("../../Modules/HR/JobDetail")
 
-const SaveJobsController= async (req, res)=>{
-//    console.log(re)
-    const jobID= req.query.id   
-    console.log(jobID)
+const SavedJobController= async (req, res)=>{
 
-    const job= await JobDetail.findById(jobID)
+
+    const jobID= req.params.id
+  console.log(jobID)
     
-    if(!job){
-        res.status(404).json({message:"Job Not Found"})
+    
+    if (!jobID) {
+        return res.status(400).json({ success: false, message: "Job ID is missing" });
+    }
+
+    const job= await SavedJob.findOne({JobID:jobID,UserEmail:req.email})
+    console.log(job)
+    
+    if(job){
+       return  res.status(404).json({message:"Job Already Saved"})
     }else{
-        const saveJobObject= new SavedJob ({
+        const applyJobObject= new SavedJob ({
             UserEmail:req.email,
-            JobID:jobID  
+            JobID:jobID  ,
+            JobTitle:req.body.JobTitle,
+            CompanyName:req.body.companyName,
+            Status:"Applied"
 
         })
-        saveJobObject.save().then(()=>{
+        applyJobObject.save().then(()=>{
             res.status(200).json({success:true, message:"Job Saved Successfully"})
 
         })
         .catch((err)=>{
-            res.status(404).json({success:false, message:"Job Not Saved", err:err.message})
+            res.status(404).json({success:false, message:"Internal Server Error", err:err.message})
 
         })
 
@@ -30,4 +41,4 @@ const SaveJobsController= async (req, res)=>{
     }
 }
 
-module.exports={SaveJobsController}      
+module.exports={SavedJobController}      

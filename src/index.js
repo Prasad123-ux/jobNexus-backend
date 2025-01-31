@@ -39,6 +39,11 @@ const { updateProfileController } = require('./Controllers/Company/UpdateProfile
 const { uploadProfileImageRoute } = require('./Routes/Candidate/uploadProfileImage')
 const { getAllCompaniesRoute } = require('./Routes/Company/getAllCompanies')
 const { followCompanyRouter } = require('./Routes/Company/FollowCompanyController')
+const { getAppliedJobsRoute } = require('./Routes/Candidate/GetAppliedJobs')
+const { handleStatusRoute } = require('./Routes/Candidate/handleStatus')
+const { archiveRoute } = require('./Routes/Candidate/HandleArchive')
+const { getJobsByMailRoute } = require('./Routes/Company/getJobsByMail')
+
 
 
 
@@ -53,6 +58,7 @@ const allowedOrigins = [
   "http://localhost:3000", // Local development
   "https://jobnexus-backend.onrender.com", // Backend itself
   "https://react-application-beige.vercel.app", // Vercel frontend
+  "https://formspree.io/f/xzbnpgno"
 ];
 
 app.use(
@@ -65,7 +71,7 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
     credentials: true, // Allow credentials (cookies, etc.)
   })
@@ -79,7 +85,7 @@ app.use('/api/company', companyLoginRoute)
 app.use('/api/company', profileDataRoute)
 app.use('/api/company', updateCompanyProfileRoute)
 app.use('/api/company',  jobPostingRoute)
-app.use('/api/company',   myJobsRoute )  
+app.use('/api/company',   myJobsRoute )                 
 app.use('/api/company',   deleteJobRoute)
 app.use('/api/candidate', getAllJobsRoutes)
 app.use('/api/candidate', getJobByIDRoute)
@@ -102,6 +108,11 @@ app.use('/api/candidate/profile',updateCandidateRoute)
 app.use('/api/candidate/profile',uploadProfileImageRoute ) 
 app.use('/api',getAllCompaniesRoute)  
 app.use('/api/candidate', followCompanyRouter)
+app.use("/api/candidate", getAppliedJobsRoute) 
+app.use("/api/candidate", handleStatusRoute)
+// app.use("/api/Candidate", archiveRoute)4
+app.use("/api/candidate", archiveRoute)
+app.use("/api/company", getJobsByMailRoute)
 
 
 

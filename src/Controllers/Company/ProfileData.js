@@ -4,27 +4,25 @@ const { CompanyRegister } = require("../../Modules/HR/Registration")
 const profileDataController=(req, res)=>{
 
     // console.log(req.body.email)
-    const email= req.body.email
+    const {id}= req.params
+    console.log(id)
     
 
-  if (!email) {
-    return res.status(400).json({ success: false, message: "Email is required" });
-  }
 
-    CompanyRegister.findOne({CompanyEmail:req.body.email}).exec()
+    CompanyRegister.findOne({_id:id}).exec()
     .then((user)=>{
         
         if(user!==null){
-            res.status(200).json({success:true, message:"User Found", Data:user})
+            res.status(200).json({success:true, message:"Company Data Found", Data:user})
 
 
         }else{
-            res.status(404).json({success:false, message:"Sorry ! user not found"})
+            res.status(404).json({success:false, message:"Sorry ! Company Data not found"})
 
         }
 
     }).catch((err)=>{
-        res.status(404).json({success:false, message:"Sorry ! user not found", error:err})
+        res.status(404).json({success:false, message:"Internal Server error", error:err.message})
 
 
     })

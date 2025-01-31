@@ -8,7 +8,12 @@ const ApplyJobSchema= new mongoose.Schema({
     JobID:{
         type:String,
         required:String
-    }
+    },
+    
+    JobTitle:{type:String},
+    CompanyName:{type:String},
+    Location:{type:String },
+    Status:{type:String}
 }, {timestamps:true})
 
 const AppliedJobData= mongoose.model('AppliedJobData', ApplyJobSchema)
